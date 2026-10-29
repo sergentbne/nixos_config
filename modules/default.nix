@@ -3,8 +3,8 @@
     modules = with self.nixosModules; [
       system
       user
-      core/bootloader
-      core/network
+      bootloader
+      network
     ];
   };
 }

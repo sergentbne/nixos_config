@@ -7,8 +7,10 @@
       initialPassword = "password";
       extraGroups = [
         "networkmanager"
+
         "wheel"
       ];
     };
+    programs.zsh.enable = true;
   };
 }
