@@ -7,7 +7,6 @@
       initialPassword = "password";
       extraGroups = [
         "networkmanager"
-
         "wheel"
       ];
     };
