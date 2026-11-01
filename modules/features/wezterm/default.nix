@@ -5,10 +5,7 @@
       pkgs,
     }:
     {
-      programs.wezterm = {
-        enable = true;
-        package = self'.packages.wezterm;
-      };
+      environment.systemPackages = [ self'.packages.wezterm ];
     }
   );
   perSystem = { pkgs, ... }: {
