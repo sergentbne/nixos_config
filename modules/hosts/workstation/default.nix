@@ -6,6 +6,8 @@
       bootloader
       network
       wezterm
+      # gnome
+      # tailscale
     ];
   };
 }
