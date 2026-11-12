@@ -11,6 +11,7 @@
       settings
       audio
       cups
+      virtualization
     ];
   };
 }
