@@ -16,8 +16,15 @@
           cfgDir = ./wezterm;
         in
         {
-          "wezterm.lua".path = "${cfgDir}/wezterm.lua";
-          luaInfo.config_dir = "${cfgDir}";
+          config_dir = "${cfgDir}";
+        };
+
+      "wezterm.lua" =
+        let
+          cfgDir = ./wezterm;
+        in
+        {
+          path = "${cfgDir}/wezterm.lua";
         };
     };
   };
