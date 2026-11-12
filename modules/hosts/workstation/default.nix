@@ -8,6 +8,9 @@
       wezterm
       gnome
       tailscale
+      settings
+      audio
+      cups
     ];
   };
 }

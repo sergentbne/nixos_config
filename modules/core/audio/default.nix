@@ -1,6 +1,6 @@
 { inputs, moduleWithSystem, ... }: {
 
-  flake.nixosModules.gnome = moduleWithSystem (
+  flake.nixosModules.audio = moduleWithSystem (
     {
       pkgs,
     }:
