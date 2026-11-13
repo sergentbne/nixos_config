@@ -20,6 +20,7 @@
             efiSupport = true;
             device = "nodev";
             theme = pkgs.catppuccin-grub;
+            useOSProber = true;
           };
         };
         plymouth = {
