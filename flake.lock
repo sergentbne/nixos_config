@@ -154,14 +154,14 @@
         "flake-parts": "flake-parts",
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
-        "wezterm": "wezterm",
+        "wezterm-source": "wezterm-source",
         "wrappers": "wrappers"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "wezterm",
+          "wezterm-source",
           "nixpkgs"
         ]
       },
@@ -194,7 +194,7 @@
         "type": "github"
       }
     },
-    "wezterm": {
+    "wezterm-source": {
       "inputs": {
         "flake-utils": "flake-utils",
         "freetype2": "freetype2",

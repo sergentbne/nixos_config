@@ -11,8 +11,6 @@
   perSystem =
     {
       pkgs,
-      coufig,
-      options,
       ...
     }:
     {
@@ -33,7 +31,9 @@
           {
             path = "${cfgDir}/wezterm.lua";
           };
-        package = pkgs.lib.mkForce inputs.wezterm.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package =
+          pkgs.lib.mkForce
+            inputs.wezterm-source.packages.${pkgs.stdenv.hostPlatform.system}.default;
       };
     };
 }

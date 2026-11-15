@@ -7,7 +7,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     wrappers.url = "github:nix-community/nix-wrapper-modules";
 
-    wezterm = {
+    wezterm-source = {
       url = "github:wezterm/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
