@@ -40,8 +40,6 @@
         zsh = inputs.wrappers.wrappers.zsh.wrap {
           inherit pkgs;
           runtimePkgs = [
-            pkgs.carapace
-            pkgs.devenv
             pkgs.fzf
           ];
           zshAliases = {
