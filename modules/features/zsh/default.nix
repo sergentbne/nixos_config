@@ -1,39 +1,75 @@
-{ inputs, moduleWithSystem, ... }: {
-  flake.nixosModules.wezterm = moduleWithSystem (
+{
+  inputs,
+  moduleWithSystem,
+  ...
+}:
+{
+  flake.nixosModules.zsh = moduleWithSystem (
     {
-      self',
       pkgs,
+      self',
+      ...
     }:
     {
-      environment.systemPackages = [ self'.packages.wezterm ];
+      nixpkgs.overlays = [
+        (final: prev: {
+          zsh = self'.packages.zsh;
+        })
+      ];
+      programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+        enableBashCompletion = true;
+        autosuggestions.enable = true;
+        syntaxHighlighting.enable = true;
+        histSize = 10000;
+      };
+      users.defaultUserShell = pkgs.zsh;
     }
   );
   perSystem =
     {
       pkgs,
+      self',
+      lib,
+      inputs',
       ...
     }:
     {
-      packages.wezterm = inputs.wrappers.wrappers.wezterm.wrap {
-        inherit pkgs;
-        luaInfo =
-          let
-            cfgDir = ./wezterm;
-          in
-          {
-            config_dir = "${cfgDir}";
-          };
+      packages = {
+        zsh = inputs.wrappers.wrappers.zsh.wrap {
+          inherit pkgs;
+          runtimePkgs = [
+            pkgs.carapace
+            pkgs.devenv
+            pkgs.fzf
+          ];
+          zshAliases = {
+            lg = lib.getExe pkgs.lazygit;
+            # man = "man -P \"${lib.getExe pkgs.bat} -p\"";
+            cat = lib.getExe pkgs.bat;
+            ls = lib.getExe pkgs.eza;
+            vim = lib.getExe inputs'.serges_nvim.packages.nvim;
+            vi = lib.getExe inputs'.serges_nvim.packages.nvim;
+            df = lib.getExe pkgs.duf;
+            tree = "${lib.getExe pkgs.eza} --tree";
+            # sometime a pain, so I commented it out
+            # s docker= lib.getExe pkgs.podman;
+            imgcat = "${lib.getExe pkgs.wezterm} imgcat";
+            top = lib.getExe pkgs.btop;
+            htop = lib.getExe pkgs.btop;
+            # music= lib.getExe spotify_player;
+            lgit = lib.getExe pkgs.lazygit;
+            nsh = "${lib.getExe pkgs.nix} shell";
+            nosleep = "${lib.getExe pkgs.nix} run github:ilyasturki/nosleep";
 
-        "wezterm.lua" =
-          let
-            cfgDir = ./wezterm;
-          in
-          {
-            path = "${cfgDir}/wezterm.lua";
           };
-        package =
-          pkgs.lib.mkForce
-            inputs.wezterm-source.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          zdotdir = ./zdotdir;
+          ohMyPosh = inputs.wrappers.wrappers.oh-my-posh.wrap {
+            inherit pkgs;
+            configFile = ./oh-my-posh/catppuccin_macchiato.json;
+          };
+        };
       };
     };
 }

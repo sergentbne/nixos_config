@@ -11,6 +11,10 @@
       url = "github:wezterm/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    serges-nvim = {
+      url = "github:sergentbne/nvim-config/main";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
