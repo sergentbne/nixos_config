@@ -47,8 +47,8 @@
             # man = "man -P \"${lib.getExe pkgs.bat} -p\"";
             cat = lib.getExe pkgs.bat;
             ls = lib.getExe pkgs.eza;
-            vim = lib.getExe inputs'.serges_nvim.packages.nvim;
-            vi = lib.getExe inputs'.serges_nvim.packages.nvim;
+            vim = lib.getExe inputs'.serges-nvim.packages.default;
+            vi = lib.getExe inputs'.serges-nvim.packages.default;
             df = lib.getExe pkgs.duf;
             tree = "${lib.getExe pkgs.eza} --tree";
             # sometime a pain, so I commented it out
@@ -63,10 +63,11 @@
 
           };
           zdotdir = ./zdotdir;
-          ohMyPosh = inputs.wrappers.wrappers.oh-my-posh.wrap {
-            inherit pkgs;
-            configFile = ./oh-my-posh/catppuccin_macchiato.json;
-          };
+        };
+
+        ohMyPosh = inputs.wrappers.wrappers.oh-my-posh.wrap {
+          inherit pkgs;
+          configFile = ./oh-my-posh/catppuccin_macchiato.json;
         };
       };
     };
