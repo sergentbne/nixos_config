@@ -63,6 +63,11 @@
 
           };
           zdotdir = ./zdotdir;
+          zshrc.content = ''
+            for f in ${./zdotdir}/zsh.d/*.zsh; do
+              [ -f "$f" ] && source "$f"
+            done
+          '';
         };
 
         ohMyPosh = inputs.wrappers.wrappers.oh-my-posh.wrap {
