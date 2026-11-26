@@ -64,9 +64,17 @@
           };
           zdotdir = ./zdotdir;
           zshrc.content = ''
-            for f in ${./zdotdir}/zsh.d/*.zsh; do
-              [ -f "$f" ] && source "$f"
-            done
+                        for f in ${./zdotdir}/zsh.d/*.zsh; do
+                          [ -f "$f" ] && source "$f"
+                        done
+
+            			# Clone zcomet if necessary
+            			if [[ ! -f ${./zdotdir}/.zcomet/bin/zcomet.zsh ]]; then
+            			  git clone https://github.com/agkozak/zcomet.git ${./zdotdir}/.zcomet/bin --depth 1
+            			fi
+
+            			# Source zcomet.zsh
+            			source ${./zdotdir}/.zcomet/bin/zcomet.zsh
           '';
         };
 
